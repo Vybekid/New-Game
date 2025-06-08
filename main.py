@@ -11,15 +11,19 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Shooter')
 
 class Soldier(pygame.sprite.Sprite):
-    def __init__(self, x, y, scale, ):
+    def __init__(self, x, y, scale ):
         pygame.sprite.Sprite.__init__(self)
-        img = pygame.image.load('img/player/idle/O.png.jpg')
-        self.img = pygame.transform.scale(img, (float(img.get_width() * scale), float(img.get_height() * scale)))
-        self.rect = self.img.get_rect()
+        img = pygame.image.load('O.png.jpg')
+        self.image = pygame.transform.scale(img, (float(img.get_width() * scale), float(img.get_height() * scale)))
+        self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 
+def draw(self):
+    screen.blit(self.image, self.rect)
 
-player = Soldier(200,200,3)
+
+player = Soldier(200,200,0.9)
+player2 = Soldier(400,200,0.9)
 
 
 
@@ -28,8 +32,8 @@ while run:
 
 
 
-
-    screen.blit(img,rect)
+    player.draw()
+    player2.draw()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
