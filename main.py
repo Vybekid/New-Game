@@ -11,7 +11,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Shooter')
 
 class Soldier(pygame.sprite.Sprite):
-    def __init__(self, x, y, scale ):
+    def __init__(self, x, y, scale):
         pygame.sprite.Sprite.__init__(self)
         img = pygame.image.load('O.png.jpg')
         self.image = pygame.transform.scale(img, (float(img.get_width() * scale), float(img.get_height() * scale)))
