@@ -9,8 +9,18 @@ SCREEN_HEIGHT = int(SCREEN_WIDTH * 0.8)
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Shooter')
 
+
+
+#define player action variables
+Moving_Left = False
+Moving_Right = False
+
+
+
+
+
 class Soldier(pygame.sprite.Sprite):
-    def __init__(self, x, y, scale): # Removed the trailing comma from 'scale,'
+    def __init__(self, x, y, scale speed): # Removed the trailing comma from 'scale,'
         pygame.sprite.Sprite.__init__(self)
         img = pygame.image.load('img/player/idle/0.png')
         self.image = pygame.transform.scale(img, (int(img.get_width() * scale), int(img.get_height() * scale))) # Changed float() to int() as scale expects integer dimensions
@@ -23,19 +33,41 @@ class Soldier(pygame.sprite.Sprite):
 
 
 player = Soldier(200,200,0.2)
-player2 = Soldier(500,200,0.3)
 
 
 run = True
 while run:
     # Drawing needs to happen before event handling and display update
     player.draw()
-    player2.draw()
 
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        #Keyboard Presses
+        if event.type  == pygame.KEYDOWN:
+            if event.key == pygame.K_a:
+                Moving_Left = True
+        if event.key == pygame.K_d:
+                Moving_Right = True
+                if event.key == pygame.K_ESCAPE:
+                    run = False
+             
+
+
+
+
+        #Keyboard button Released
+        if event.type  == pygame.KEYUP:
+            if event.key == pygame.K_a:
+                Moving_Left = False
+        if event.key == pygame.K_d:
+                Moving_Right = False
+
+
+
 
     pygame.display.update()
 
 pygame.quit()
+
