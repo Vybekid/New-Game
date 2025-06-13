@@ -43,6 +43,7 @@ class Soldier(pygame.sprite.Sprite):
 
 player = Soldier(200,200,0.2, 5)
 
+#Lets Run it
 run = True
 while run:
     # Clear screen and draw elements for the current frame
@@ -60,7 +61,7 @@ while run:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_a:
                 Moving_Left = True
-            elif event.key == pygame.K_d: # Use elif for exclusive key presses if applicable
+            elif event.key == pygame.K_d:
                 Moving_Right = True
             elif event.key == pygame.K_ESCAPE: # This should be an independent check
                 run = False
