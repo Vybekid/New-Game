@@ -11,7 +11,7 @@ pygame.display.set_caption('Shooter')
 
 #set framerate
 clock = pygame.time.Clock()
-FPS = 25
+FPS = 60
 
 
 #define player action variables
@@ -19,12 +19,13 @@ Moving_Left = False
 Moving_Right = False
 
 class Soldier(pygame.sprite.Sprite):
-    def __init__(self, x, y, scale, speed):
+    def __init__(self,char_type, x, y, scale, speed):
         pygame.sprite.Sprite.__init__(self)
+        self.char_type = char_type
         self.speed = speed
         self.direction = 1
         self.flip = False
-        img = pygame.image.load('img/player/idle/0.png')
+        img = pygame.image.load(f'img/{self.char_type}/idle/0.png')
         self.image = pygame.transform.scale(img, (int(img.get_width() * scale), int(img.get_height() * scale)))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
@@ -49,10 +50,11 @@ class Soldier(pygame.sprite.Sprite):
         self.rect.y += dy
 
     def draw(self):
-        screen.blit(self.image, self.rect)
+        screen.blit(pygame.transform.flip(self.image, self.flip, False), self.rect)
 
 
-player = Soldier(200,200,0.2, 5)
+player = Soldier('player', 200,200,0.17, 5)
+enemy = Soldier('enemy', 400,200,0.17, 5)
 
 #Lets Run it
 run = True
@@ -63,6 +65,7 @@ while run:
     # A background fill or image load would typically go here
     screen.fill((0, 0, 0)) # Example: fill screen with black
     player.draw()
+    enemy.draw()
     player.move(Moving_Left, Moving_Right)
 
 
